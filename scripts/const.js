@@ -38,6 +38,11 @@ export const SOURCES = {
     INEVITABLE_RETURN: "Compendium.pf2e-playtest-data.impossible-playtest-actions.Item.jyhYP51XI09DFSqy",
 
     BIND_HEROIC_SPIRIT_STRIKE: "Compendium.pf2e-playtest-data.impossible-playtest-effects.Item.MTYxqIqJVzza1Lro"
+  },
+
+  MECHANIC: {
+    DEPLOY_MINE: "Compendium.starfinder-field-test-for-pf2e.actions.Item.ccVcznj9KVYHLVaY",
+    DOUBLE_DEPLOYMENT: "Compendium.starfinder-field-test-for-pf2e.feats.Item.x5rhl6ThqqjHGglD"
   }
 };
 
@@ -75,6 +80,10 @@ export const CREATURES = {
     SKELETAL_LANCERS: "Compendium.pf2e-playtest-data.impossible-playtest-thralls.Actor.d1333zUKqydfJM9b",
     LIVING_GRAVEYARD: "Compendium.pf2e-playtest-data.impossible-playtest-thralls.Actor.CN6TMEeEd0Wmvkct",
     RECURRING_NIGHTMARE: "Compendium.pf2e-playtest-data.impossible-playtest-thralls.Actor.uu7VA9eIwi1tUZVs"
+  },
+
+  MECHANIC: {
+    MINE: "Compendium.pf2e-summons-assistant.pf2e-summons-assistant-actors.Actor.sAVuxP25VE126TdZ",
   }
 }
 
@@ -150,4 +159,34 @@ export const EFFECTS = {
     },
     "img": imagePath,
   })
+}
+
+export const ACTIONS = {
+  MECHANIC: {
+  CRITICAL_EXPLOSION:{
+    "name": "Critical Explosion",
+    "type": "action",
+    "system": {
+    "actionType": {
+      "value": "passive"
+    },
+    "description": {
+      "value": "<p>Your mines explode in a cloud of shrapnel that shreds through a creature's weakest points to cause lasting harm. Add your Intelligence modifier to your mines' damage. A creature that critically fails its saving throw against one of your mines is additionally dealt persistent damage equal to your Intelligence modifier. If the mine dealt physical damage, this is persistent bleed damage. Otherwise, the persistent damage is of the same type dealt by the mine.</p>",
+      "gm": ""
+    },
+    "publication": {
+      "title": "PF2e Summons Assistant",
+      "authors": "",
+      "license": "OGL",
+      "remaster": true
+    },        
+    "rules":[{"key":"RollOption", "option":"critical-explosion"}],        
+    "actions": {
+      "value": 1
+    },
+    "category": null
+    },
+    "img": "systems/pf2e/icons/actions/Passive.webp",
+  }
+  }
 }

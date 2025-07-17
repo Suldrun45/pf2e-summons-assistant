@@ -1,4 +1,4 @@
-import { ALT_ART, CREATURES, EFFECTS, SOURCES } from "./const.js";
+import { ACTIONS, ALT_ART, CREATURES, EFFECTS, SOURCES } from "./const.js";
 import { hasNoTargets, onlyHasJB2AFree } from "./helpers.js";
 import { incarnateDetails } from "./incarnate.js";
 
@@ -122,6 +122,24 @@ export function getSpecificSummonDetails(uuid, data = { rank: 0, summonerLevel: 
                 rank: 1,
                 itemsToAdd: [EFFECTS.NECROMANCER.THRALL_EXPIRATION]
             }]
+        case SOURCES.MECHANIC.DEPLOY_MINE:
+            return [{ specific_uuids: [CREATURES.MECHANIC.MINE], rank: data.rank, 
+                modifications: {
+                    'system.details.level.value': data.summonerLevel,
+                    'system.resources.dc.value': data.classDC, 
+                    'system.abilities.int.mod': data.int
+                },
+                itemsToAdd: data.hasCriticalExplosion ? [ACTIONS.MECHANIC.CRITICAL_EXPLOSION] : []
+            }]
+        case SOURCES.MECHANIC.DOUBLE_DEPLOYMENT:
+            return [{ specific_uuids: [CREATURES.MECHANIC.MINE], rank: data.rank, amount: 2,                 
+                modifications: {
+                    'system.details.level.value': data.summonerLevel,
+                    'system.resources.dc.value': data.classDC, 
+                    'system.abilities.int.mod': data.int
+                },
+                itemsToAdd: data.hasCriticalExplosion ? [ACTIONS.MECHANIC.CRITICAL_EXPLOSION] : []
+            }]	
         default:
             return null;
     }

@@ -1,6 +1,7 @@
 import { EFFECTS, MODULE_ID, SOURCES, SUMMON_LEVELS_BY_RANK } from "./const.js";
 import { addTraits, compFromUuid, messageItemHasRollOption } from "./helpers.js";
 import { extractDCValueRegex, isIncarnate } from "./incarnate.js";
+import { isMechanic, setMechanicRelevantInfo } from "./mechanic.js";
 import { scaleActorItems, scaleNPCToLevel } from "./scaleActor/scaleActor.js";
 import { setupSettings } from "./settings.js";
 import { getSpecificSummonDetails } from "./specificSummons.js";
@@ -35,6 +36,9 @@ Hooks.once("ready", async function () {
     const spellRelevantInfo = { rank: spellRank, summonerLevel: summonerActor.level }
     //Grab DC for Incarnate spells
     if (isIncarnate(chatMessage)) spellRelevantInfo.dc = extractDCValueRegex(chatMessage.content) ?? 0;
+    if (isMechanic(chatMessage)) {
+      setMechanicRelevantInfo(summonerActor, spellRelevantInfo);
+    }
 
     let summonDetailsGroup = getSpecificSummonDetails(itemUuid, spellRelevantInfo)
     if (!summonDetailsGroup) {
@@ -126,7 +130,7 @@ Hooks.once("ready", async function () {
         });
       }
 
-      const summonType = messageItemHasRollOption(chatMessage, "thrall") ? "thrall" : "summon"
+      const summonType = isMechanic(chatMessage) ? "mechanic" : (messageItemHasRollOption(chatMessage, "thrall") ? "thrall" : "summon")
       const additionalTraits = addTraits(summonType);
 
       const selectedActor = await compFromUuid(selectedActorUuid);
