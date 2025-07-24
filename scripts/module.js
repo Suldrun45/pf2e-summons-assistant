@@ -2,6 +2,7 @@ import { MODULE_ID, SOURCES } from "./const.js";
 import { messageItemHasRollOption } from "./helpers.js";
 import { extractDCValueRegex, isIncarnate } from "./incarnate.js";
 import { isMechanic, setMechanicRelevantInfo } from "./specificClasses/mechanic.js";
+import { isSummoner, setSummonerRelevantInfo } from "./specificClasses/summoner.js";
 import { setupSettings } from "./settings.js";
 import { getSpecificSummonDetails } from "./specificSummons.js";
 import { handleUpdateMessage } from "./updateMessage.js";
@@ -42,15 +43,26 @@ Hooks.once("ready", async function () {
     if (isMechanic(chatMessage)) {
       setMechanicRelevantInfo(summonerActor, spellRelevantInfo);
     }
+    if (isSummoner(chatMessage)){
+      setSummonerRelevantInfo(summonerActor, spellRelevantInfo);
+    }
 
-    let summonDetailsGroup = getSpecificSummonDetails(itemUuid, spellRelevantInfo)
+    let summonDetailsGroup = await getSpecificSummonDetails(itemUuid, spellRelevantInfo)
     if (!summonDetailsGroup) {
       summonDetailsGroup = getTraditionalSummonerSpellDetails(itemUuid, spellRank);
     }
 
-    const summonType = isMechanic(chatMessage) ? "mechanic" : (messageItemHasRollOption(chatMessage, "thrall") ? "thrall" : "summon")
+    const summonType = getSummonType(chatMessage);
     await summon(summonerActor, itemUuid, summonType, summonDetailsGroup);
   });
 });
 
-
+function getSummonType(chatMessage){
+  if (isMechanic(chatMessage))
+    return "mechanic";
+  if (messageItemHasRollOption(chatMessage, "thrall"))
+    return "thrall";
+  if (isSummoner(chatMessage))
+    return "summoner";
+  return "summon";
+}

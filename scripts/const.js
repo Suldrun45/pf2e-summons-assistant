@@ -44,6 +44,10 @@ export const SOURCES = {
   MECHANIC: {
     DEPLOY_MINE: "Compendium.starfinder-field-test-for-pf2e.actions.Item.ccVcznj9KVYHLVaY",
     DOUBLE_DEPLOYMENT: "Compendium.starfinder-field-test-for-pf2e.feats.Item.x5rhl6ThqqjHGglD"
+  },
+
+  SUMMONER: {
+    MANIFEST_EIDOLON: "Compendium.pf2e.actionspf2e.Item.n5vwBnLSlIXL9ptp"
   }
 };
 

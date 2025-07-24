@@ -13,7 +13,8 @@ export async function summon(summonerActor, itemUuid, summonType, summonDetailsG
     const allowedSpecificUuids = summonDetails?.specific_uuids || [];
     const actorModifications = summonDetails?.modifications || {};
     const itemsToAdd = summonDetails?.itemsToAdd || [];
-    if (game.settings.get(MODULE_ID, "effect-ownership")) {
+    const isCharacter = summonDetails?.isCharacter;
+    if (game.settings.get(MODULE_ID, "effect-ownership") && !isCharacter) {
       itemsToAdd.unshift(
         EFFECTS.SUMMON_OWNER(
           getTokenImage(summonerActor.prototypeToken)

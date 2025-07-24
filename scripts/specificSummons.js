@@ -1,8 +1,9 @@
 import { ACTIONS, ALT_ART, CREATURES, EFFECTS, SOURCES } from "./const.js";
 import { hasNoTargets, onlyHasJB2AFree } from "./helpers.js";
 import { incarnateDetails } from "./incarnate.js";
+import { getEidolon } from "./specificClasses/summoner.js"
 
-export function getSpecificSummonDetails(uuid, data = { rank: 0, summonerLevel: 0, dc: 0 }) {
+export async function getSpecificSummonDetails(uuid, data = { rank: 0, summonerLevel: 0, dc: 0 }) {
     switch (uuid) {
         case SOURCES.SUMMON.PHANTASMAL_MINION:
             return [{ specific_uuids: [CREATURES.PHANTASMAL_MINION], rank: data.rank }]
@@ -146,7 +147,12 @@ export function getSpecificSummonDetails(uuid, data = { rank: 0, summonerLevel: 
                     'system.abilities.int.mod': data.int
                 },
                 itemsToAdd: data.hasCriticalExplosion ? [ACTIONS.MECHANIC.CRITICAL_EXPLOSION()] : []
-            }]	
+            }]
+        case SOURCES.SUMMONER.MANIFEST_EIDOLON:
+            const uuid = await getEidolon(data.summonerActorId);
+            if(uuid)
+                return [{specific_uuids: [uuid], isCharacter: true}];
+            return null;
         default:
             return null;
     }
