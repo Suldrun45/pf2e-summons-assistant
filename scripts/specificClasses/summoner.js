@@ -17,7 +17,7 @@ export async function getEidolon(summonerActorId){
     const eidolons = game.actors
         .filter(act=> 
             act.type == 'character' && 
-            act.class._stats.compendiumSource == EIDOLON_CLASS_UUID
+            act.class.sourceId.compendiumSource == EIDOLON_CLASS_UUID
         )
         .toSorted(act => act.name)
         .map(act => ({ name: act.name, uuid: act.uuid, selected: defaultEidolonUUID && act.uuid == defaultEidolonUUID }));
