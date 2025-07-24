@@ -29,27 +29,10 @@ export async function getEidolon(summonerActorId){
         await summonerActor.setFlag(MODULE_ID, 'eidolonUUID', eidolonUUID);   
         return eidolonUUID;
     }
-    if (eidolons.length > 1){    
-        const eidolonsOptions = eidolons.map(eidolon => `<option value="${eidolon.uuid}" ${(eidolon.selected ? "selected" : "")}>${eidolon.name}</option>`)
-        const uuidResult = await foundry.applications.api.DialogV2.wait({
-            window: { title: "Select your Eidolon" },
-            content: `
-                <select name="eidolon">
-                    ${eidolonsOptions}                
-                </select>
-            `,
-            buttons: [{
-                label: "Select",
-                action: "select",
-                callback : async (event, button, dialog) => {
-                    const eidolonUUID = button.form.elements.eidolon.value;
-                    await summonerActor.setFlag(MODULE_ID, 'eidolonUUID', eidolonUUID);
-                    return eidolonUUID;
-                }
-            }]
-        });
-        if (uuidResult)
-            return uuidResult;
+   ui.notifications.warn(game.i18n.localize("pf2e-summons-assistant.notification.summoner.too-many-eidelons"))
+   const eidolonUUID = eidolons[0].uuid;
+   await summonerActor.setFlag(MODULE_ID, 'eidolonUUID', eidolonUUID);   
+   return eidolonUUID;
     }
     return null;
 }
