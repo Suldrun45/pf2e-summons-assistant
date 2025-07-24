@@ -59,6 +59,11 @@
           "description": "This measures how long till this thrall expires."
         }
       }
+    },
+    "notification": {
+      "summoner": {
+        "too-many-eidelons": "You own too many eidolons."
+      }
     }
   }
 }
