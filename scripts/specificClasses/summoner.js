@@ -19,7 +19,6 @@ export async function getEidolon(summonerActorId){
             act.type == 'character' && 
             act.class.sourceId.compendiumSource == EIDOLON_CLASS_UUID
         )
-        .toSorted(act => act.name)
         .map(act => ({ name: act.name, uuid: act.uuid, selected: defaultEidolonUUID && act.uuid == defaultEidolonUUID }));
     
     //TODO: When the Shared Data option of Toolbelt is back, check if there are any eidolons whose master are the summoner and, in that case, return them
