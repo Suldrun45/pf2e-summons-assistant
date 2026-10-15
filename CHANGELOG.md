@@ -1,6 +1,6 @@
 ## Unreleased
 
-
+- Fix Mirror Thaumaturge going out of initiative (💻 @Sasane)
 
 - Updated French translation (🌐 @rectulo)
 
