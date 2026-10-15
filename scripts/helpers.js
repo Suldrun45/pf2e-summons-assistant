@@ -284,13 +284,13 @@ export async function deleteClones(actorID, tokens, selectedTokenId) {
 		c => c.actorId === actorID,
 	);
 	if (combatant) {
-		socketlib.modules
+		await socketlib.modules
 			.get(MODULE_ID)
 			.executeAsGM("updateCombatant", combatant.id, {
 				tokenId: selectedTokenId,
 			});
 	}
-
+	
 	tokens
 		.filter(t => t.id !== selectedTokenId)
 		.forEach((t) => {
