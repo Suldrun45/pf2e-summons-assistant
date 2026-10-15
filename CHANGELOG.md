@@ -1,5 +1,9 @@
 ## Unreleased
 
+
+
+- Updated French translation (🌐 @rectulo)
+
 ## 2.20.3
 
 - Added link to restrained in Conglomeraate of Limbs
