@@ -2,7 +2,7 @@
 
 ## 2.20.3
 
-- Added link to restrained in Conglomeraate of Limbs
+- Added link to restrained in Conglomerate of Limbs
 
 ## 2.20.2
 
