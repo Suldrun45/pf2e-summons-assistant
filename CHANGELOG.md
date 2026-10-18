@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 2.20.5
+
+- Actually packed previous release
+
 ## 2.20.4
 
 - Update Mechanic's Mine to Tech Core (💻 @Sasane)
