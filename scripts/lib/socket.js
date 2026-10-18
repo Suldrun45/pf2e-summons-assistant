@@ -25,7 +25,7 @@ async function deleteToken(tokenId) {
 async function updateCombatant(combatantId, updateData) {
 	const combatant = game?.combat?.combatants?.get(combatantId);
 	if (combatant) {
-		return combatant.update(updateData);
+		return await combatant.update(updateData);
 	}
 }
 

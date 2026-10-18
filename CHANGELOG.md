@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 2.20.4
+
+- Update Mechanic's Mine to Tech Core (💻 @Sasane)
+- Fix Mirror Thaumaturge going out of initiative (💻 @Sasane)
+- Updated French translation (🌐 @rectulo)
+
 ## 2.20.3
 
 - Added link to restrained in Conglomerate of Limbs
